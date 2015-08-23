@@ -1,0 +1,78 @@
+  <!-- <div class="container"> -->
+    <form role="form">
+      <div class="form-group">
+        <label><h3>Thông Tin Điện Thoại</h3></label><br>
+      </div>
+      <div class="form-group">
+        <label>Mã:</label><br>
+        <input ng-disabled="edit" type="text" class="form-control" ng-model="phone.id" ng-disabled="edit" placeholder="ID">
+      </div>
+      <div class="form-group">
+        <label>Tuổi:</label><br>
+        <input type="text" class="form-control" ng-model="phone.age" placeholder="Age">
+      </div>
+      <div class="form-group">
+        <label>Tên:</label><br>
+        <input type="text" class="form-control" ng-model="phone.name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label>Mô tả:</label><br>
+        <input type="text" class="form-control" ng-model="phone.snippet" placeholder="Snippet">
+      </div>
+      <div class="form-group">
+        <label>Đường Dẫn Ảnh:</label><br>
+        <input type="text" class="form-control" ng-model="phone.imageUrl" placeholder="Image Url"><br/>
+        <!-- <input type="text" class="form-control" ng-model="fileUrl" placeholder="Url"><br/> -->
+        <img ng-src="{{phone.imageUrl}}" style="width:304px;height:228px;"><br/><br/>
+        <!-- <input id="xFilePath" name="FilePath" type="text" size="60" />
+        <input type="button" value="Browse Server" onclick="BrowseServer();" /> -->
+        <button type="button" class="btn btn-primary" ng-click="BrowseImage()"><span class="glyphicon glyphicon-hdd"></span> Tìm Ảnh</button>
+      </div>
+      <div class="form-group">
+        <label>Chi Tiết:</label><br>
+        <!-- <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'>
+        </div> -->
+        <textarea class="ckeditor" name="editor1" id="editor" ng-model="phone.detail"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="Save()"><span class="glyphicon glyphicon-save"></span>  Lưu</button>
+        <a href="#/phones">
+          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-remove-circle"></span>  Hủy</button>
+        </a>
+        <button type="button" class="btn btn-primary" ng-click="Test()"><span class="glyphicon glyphicon-remove-circle"></span>  Test Detail</button>
+        <div ng-show={{false}}>
+          Status: {{status}}<br/>
+          detail: {{phone.detail}}<br/>
+          content: {{content}}
+        </div>
+      </div>
+    </form>
+    <!-- <script>
+      CKEDITOR.replace("editor");
+    </script> -->
+    <!-- <script type="text/javascript" src="../ckfinder.js"></script> -->
+  	<!-- <script type="text/javascript">
+      function BrowseServer()
+      {
+      	// You can use the "CKFinder" class to render CKFinder in a page:
+      	var finder = new CKFinder();
+      	finder.basePath = '../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+      	finder.selectActionFunction = SetFileField;
+      	finder.popup();
+
+      	// It can also be done in a single line, calling the "static"
+      	// popup( basePath, width, height, selectFunction ) function:
+      	// CKFinder.popup( '../', null, null, SetFileField ) ;
+      	//
+      	// The "popup" function can also accept an object as the only argument.
+      	// CKFinder.popup( { basePath : '../', selectActionFunction : SetFileField } ) ;
+      }
+
+      // This is a sample function which is called when a file is selected in CKFinder.
+      function SetFileField( fileUrl )
+      {
+      	document.getElementById( 'xFilePath' ).value = fileUrl;
+      }
+  	</script> -->
+  <!-- </div> -->
+<!-- </div> -->

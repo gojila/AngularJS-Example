@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  </head>
+  <body ng-app="studentApp">
+    <h3>Phone detail</h3>
+    <div class="container">
+      <form role="form" ng-submit="submit()" ng-controller="StudentDetailCtrl" method="post">
+        <div class="form-group">
+          <label>ID:</label><br>
+          <input type="text" class="form-control" ng-model="id" ng-disabled="edit" placeholder="ID">
+        </div>
+        <div class="form-group">
+          <label>Name:</label><br>
+          <input type="text" class="form-control" ng-model="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label>Address:</label><br>
+          <input type="text" class="form-control" ng-model="address" placeholder="Address">
+        </div>
+        <div class="form-group">
+          <!-- <input type="submit" id="submit" class="btn btn-primary" value="Submit" /> -->
+          <button type="button" class="btn btn-primary" ng-click="submit()">Save</button>
+          <a href="#/phones">
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancel</button>
+          </a>
+        </div>
+        <div class="form-group">
+          Nofication: {{nofication}}
+        </div>
+      </form>
+    </div>
+    <script>
+      var app = angular.module('studentApp', []);
+
+      // app.factory('Student', ['$resource', function($resource){
+      //   var resource = $resource('http://localhost:49384/api/student', {}, { get: { method: 'get', isArray:  true }});
+      //   return resource;
+      // }]);
+
+      app.controller('StudentDetailCtrl', ['$scope', '$http',
+        function($scope, $http){
+          $scope.nofication = '';
+          $scope.submit = function(){
+            // var student = {
+            //             "id": $scope.id,
+            //             "name": $scope.name,
+            //             "address": $scope.address
+            // };
+            $http({
+                url: "http://localhost:49298/api/student",
+                method: "POST",
+                data:JSON.stringify({
+                    id: $scope.id,
+                    name: $scope.name,
+                    address: $scope.address
+                }),
+                headers: {
+                    //'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'CommandType': 'PostStudent'
+                }
+            }).
+            success(function (data, status, headers, config){
+              alert('Student Added Successfully');
+              $scope.id = '';
+              $scope.name = '';
+              $scope.address = '';
+            }).
+            error(function (data, status, headers, config){
+              alert("Error");
+            });
+
+
+            // $http({
+            //     method: 'POST',
+            //     url: 'http://localhost:49384/api/student',
+            //     data: JSON.stringify(student),
+            //     headers: {'Content-Type': 'application/json'}
+            // }).
+            // success(function (data, status, headers, config) {
+            //     alert('Student Added Successfully');
+            // }).
+            // error(function (data, status, headers, config) {
+            //     alert("error");
+            // });
+            // $http.post('http://localhost:49384/api/student', student).
+            //         success(function (data, status, headers, config) {
+            //             alert('Student Added Successfully');
+            //         }).
+            //         error(function (data, status, headers, config) {
+            //             alert("error");
+            //         });
+
+            // Student.save({ id: $scope.id, name: $scope.name, address: $scope.address}, function(response){
+            //   if(response){
+            //     $scope.nofication = 'Saved';
+            //     $scope.id = '';
+            //     $scope.name = '';
+            //     $scope.address = '';
+            //   }
+            //   else {
+            //     $scope.nofication = 'Not Save';
+            //   }
+            // });
+          };
+         }]);
+    </script>
+  </body>
+</html>
